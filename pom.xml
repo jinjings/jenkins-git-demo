@@ -40,6 +40,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>2.2.5.RELEASE</version>
+				<!--
 				<configuration>
 					<mainClass>com.example.demo.DemoApplication</mainClass>
 				</configuration>
@@ -52,6 +53,7 @@
 						</goals>
 					</execution>
 				</executions>
+				-->
 			</plugin>
 			<!--在这里修改版本
 			<plugin>
@@ -65,8 +67,20 @@
 				<groupId>com.spotify</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>1.2.0</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<imageName>${project.artifactId}</imageName>
+					<!--指定远程 docker api地址
+					<dockerHost>http://192.168.56.101:2375</dockerHost>
+					-->
 					<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
 					<serverId>nexus</serverId>
 					<resources>
